@@ -1,4 +1,4 @@
-import '../repos/home_repo.dart';
+import '../../data/repos/home_repo.dart';
 import 'package:dartz/dartz.dart';
 import '../entities/book_entity.dart';
 import '../../../../core/errors/failure.dart';
