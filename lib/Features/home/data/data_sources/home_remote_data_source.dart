@@ -1,7 +1,7 @@
+import '../../domain/entities/book_entity.dart';
+import '../../../../core/utils/api_service.dart';
 import 'package:clean_arch_bookly_app/Features/home/data/models/book_model/book_model.dart';
 
-import '../../../../core/utils/api_service.dart';
-import '../../domain/entities/book_entity.dart';
 
 abstract class HomeRemoteDataSource{
    Future< List<BookEntity>> fetchFeaturedBooks();
