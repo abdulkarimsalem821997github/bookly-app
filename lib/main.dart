@@ -7,6 +7,7 @@ import 'package:clean_arch_bookly_app/Features/home/presentation/manager/feature
 import 'package:clean_arch_bookly_app/Features/home/presentation/manager/newest_books_cubit/newest_books_cubit.dart';
 import 'package:clean_arch_bookly_app/core/utils/api_service.dart';
 import 'package:clean_arch_bookly_app/core/utils/functions/setup_service_locator.dart';
+import 'package:clean_arch_bookly_app/core/utils/simple_bloc_observer.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -25,6 +26,7 @@ void main() async {
   setupServiceLocator();
   await Hive.openBox<BookEntity>(kFuturedBox);
   await Hive.openBox<BookEntity>(kNewestBox);
+  Bloc.observer = SimpleBlocObserver();
   runApp(const Bookly());
 }
 
@@ -36,7 +38,8 @@ class Bookly extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) {
-          return FeaturedBooksCubit(FetchFeaturedBooksUseCase(sl.get<HomeReposeImpl>()));
+          return FeaturedBooksCubit(
+              FetchFeaturedBooksUseCase(sl.get<HomeReposeImpl>()));
         }),
         BlocProvider(create: (context) {
           return NewestBooksCubit(FetchNewestBooksUseCase(HomeReposeImpl(
