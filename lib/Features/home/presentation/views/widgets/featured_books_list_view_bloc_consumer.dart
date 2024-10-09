@@ -1,8 +1,8 @@
 import 'package:clean_arch_bookly_app/Features/home/domain/entities/book_entity.dart';
 import 'package:clean_arch_bookly_app/Features/home/presentation/views/widgets/featured_books_list_view.dart';
+import 'package:clean_arch_bookly_app/Features/home/presentation/views/widgets/featured_books_list_view_loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../../core/utils/functions/build_error_snack_bar.dart';
 import '../../manager/featured_books_cubit/featured_books_cubit.dart';
 
@@ -30,7 +30,7 @@ class FeaturedBooksListViewBlocConsumer extends StatelessWidget {
       } else if (state is FeaturedBooksError) {
         return Text(state.errorMessage);
       } else {
-        return const Center(child: CircularProgressIndicator());
+        return const Center(child: FeaturedBooksListViewLoadingIndicator());
       }
     });
   }

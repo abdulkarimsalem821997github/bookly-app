@@ -14,17 +14,23 @@ class _CustomFadingWidgetState extends State<CustomFadingWidget>
   late Animation _animation;
   @override
   void initState() {
-    _animationController = AnimationController(vsync: this);
-    _animation = Tween<double>(begin: .2, end: .8).animate(_animationController);
-    _animationController.addListener(() {
-      setState(() {});
-    });
+    _animationController = AnimationController(vsync: this, duration: const Duration(seconds: 2));
+    _animation =Tween<double>(begin: .2, end: .8).animate(_animationController);
+    _animationController.addListener(() {setState(() {});});
     _animationController.repeat(reverse: true);
     super.initState();
   }
 
   @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return  widget.child;
+    return Opacity(
+      opacity: _animation.value ,
+      child: widget.child);
   }
 }
